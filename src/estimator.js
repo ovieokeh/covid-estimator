@@ -29,23 +29,24 @@ const covid19ImpactEstimator = (data = inputData) => {
 
   const days = getNormalisedDays(periodType, timeToElapse);
 
-  const currentlyInfected = getCurrentlyInfected(reportedCases);
-  const severeCurrentlyInfected = getCurrentlyInfected(reportedCases, true);
+  const currentlyInfected = Math.trunc(getCurrentlyInfected(reportedCases));
+  const severeCurrentlyInfected = Math.trunc(getCurrentlyInfected(reportedCases, true));
 
   const calculateRemainingData = (infected, period) => {
-    const infectionsByRequestedTime = getInfectionsByDay(infected, period);
-    const severeCasesByRequestedTime = getPercentOf(infectionsByRequestedTime, 15);
-    const hospitalBedsByRequestedTime = getAvailableHospitalBeds(totalHospitalBeds, 35) - severeCasesByRequestedTime;
-    const casesForICUByRequestedTime = getPercentOf(infectionsByRequestedTime, 5);
-    const casesForVentilatorsByRequestedTime = getPercentOf(infectionsByRequestedTime, 2);
-    const dollarsInFlight = getDollarsInFlight(infectionsByRequestedTime, period, region);
+    const infectionsByRequestedTime = Math.trunc(getInfectionsByDay(infected, period));
+    const severeCasesByRequestedTime = Math.trunc(getPercentOf(infectionsByRequestedTime, 15));
+    const hospitalBedsByRequestedTime = Math.trunc(
+      getAvailableHospitalBeds(totalHospitalBeds, 35) - severeCasesByRequestedTime
+    );
+    const casesForICUByRequestedTime = Math.trunc(getPercentOf(infectionsByRequestedTime, 5));
+    const casesForVentilatorsByRequestedTime = Math.trunc(getPercentOf(infectionsByRequestedTime, 2));
+    const dollarsInFlight = Math.trunc(getDollarsInFlight(infectionsByRequestedTime, period, region));
 
     return {
       currentlyInfected: infected,
       infectionsByRequestedTime,
       severeCasesByRequestedTime,
       hospitalBedsByRequestedTime,
-      calculateRemainingData,
       casesForICUByRequestedTime,
       casesForVentilatorsByRequestedTime,
       dollarsInFlight

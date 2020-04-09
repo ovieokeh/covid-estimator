@@ -17,14 +17,8 @@ export const getCurrentlyInfected = (reportedCases, isSevere = false) => {
   return reportedCases * estimatedFactor;
 };
 
-export const getInteger = (number) => {
-  let result = number.toString();
-  [result] = result.split('.');
-  return Number(result);
-};
-
 export const getInfectionsByDay = (currentlyInfected, days) => {
-  let factor = getInteger(days / 3);
+  let factor = Math.trunc(days / 3);
   factor = 2 ** factor;
 
   return currentlyInfected * factor;
@@ -35,4 +29,4 @@ export const getPercentOf = (num, percent) => (num * percent) / 100;
 export const getAvailableHospitalBeds = (totalBeds, availability) => getPercentOf(totalBeds, availability);
 
 export const getDollarsInFlight = (infectionsByRequestedTime, days, region) =>
-  infectionsByRequestedTime * region.avgDailyIncomePopulation * region.avgDailyIncomeInUSD * days;
+  (infectionsByRequestedTime * region.avgDailyIncomePopulation * region.avgDailyIncomeInUSD) / days;

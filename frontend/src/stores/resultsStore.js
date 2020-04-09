@@ -2,7 +2,7 @@ import { derived } from 'svelte/store';
 
 import dataStore from './dataStore';
 import regionStore from './regionStore';
-import covidEstimator from '../functions/estimator';
+import covidEstimator from '../../../src/estimator';
 
 const resultStore = derived([dataStore, regionStore], ([$ds, $rs], set) => {
   const data = {

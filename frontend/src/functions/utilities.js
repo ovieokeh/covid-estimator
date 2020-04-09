@@ -1,38 +1,44 @@
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
 
-export const getNormalisedDays = (periodType, days) => {
-  switch (periodType) {
-    case 'weeks':
-      return days * 7;
-    case 'months':
-      return days * 30;
-    default:
-      return days;
+import FaBiohazard from 'svelte-icons/fa/FaBiohazard.svelte';
+import FaHeartbeat from 'svelte-icons/fa/FaHeartbeat.svelte';
+import FaHeartBroken from 'svelte-icons/fa/FaHeartBroken.svelte';
+import FaProcedures from 'svelte-icons/fa/FaProcedures.svelte';
+import FaClinicMedical from 'svelte-icons/fa/FaClinicMedical.svelte';
+import FaChargingStation from 'svelte-icons/fa/FaChargingStation.svelte';
+import FaDollarSign from 'svelte-icons/fa/FaDollarSign.svelte';
+
+export const iconMapping = {
+  currentlyInfected: FaBiohazard,
+  infectionsByRequestedTime: FaHeartbeat,
+  severeCasesByRequestedTime: FaHeartBroken,
+  hospitalBedsByRequestedTime: FaProcedures,
+  casesForICUByRequestedTime: FaClinicMedical,
+  casesForVentilatorsByRequestedTime: FaChargingStation,
+  dollarsInFlight: FaDollarSign
+};
+
+export const formatPeriodType = (periodType, period) => {
+  let result = periodType.replace(/^\w/, (c) => c.toUpperCase());
+
+  if (period === 1) {
+    result = [...result];
+    result.pop();
+    result = result.join('');
   }
+
+  return result;
 };
 
-export const getCurrentlyInfected = (reportedCases, isSevere = false) => {
-  const estimatedFactor = isSevere ? 50 : 10;
-  return reportedCases * estimatedFactor;
-};
+export const formatNumber = (number) => new Intl.NumberFormat().format(number);
 
-export const getInteger = (number) => {
-  let result = number.toString();
-  [result] = result.split('.');
-  return Number(result);
-};
-
-export const getInfectionsByDay = (currentlyInfected, days) => {
-  let factor = getInteger(days / 3);
-  factor = 2 ** factor;
-
-  return currentlyInfected * factor;
-};
-
-export const getPercentOf = (num, percent) => (num * percent) / 100;
-
-export const getAvailableHospitalBeds = (totalBeds, availability) => getPercentOf(totalBeds, availability);
-
-export const getDollarsInFlight = (infectionsByRequestedTime, days, region) =>
-  infectionsByRequestedTime * region.avgDailyIncomePopulation * region.avgDailyIncomeInUSD * days;
+export const formatData = (impact) => ({
+  currentlyInfected: formatNumber(impact.currentlyInfected),
+  infectionsByRequestedTime: formatNumber(impact.infectionsByRequestedTime),
+  hospitalBedsByRequestedTime: formatNumber(impact.hospitalBedsByRequestedTime),
+  severeCasesByRequestedTime: formatNumber(impact.severeCasesByRequestedTime),
+  casesForICUByRequestedTime: formatNumber(impact.casesForICUByRequestedTime),
+  casesForVentilatorsByRequestedTime: formatNumber(impact.casesForVentilatorsByRequestedTime),
+  dollarsInFlight: new Intl.NumberFormat('en-US', { minimumSignificantDigits: 2 }).format(impact.dollarsInFlight)
+});

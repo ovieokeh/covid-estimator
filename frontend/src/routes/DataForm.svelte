@@ -20,7 +20,7 @@
   }
 
   const handleInput = event => {
-    dataStore.update(event.target.id, Number(event.target.value))
+    dataStore.update(event.target.id, Number(event.target.value) || event.target.value)
   }
 
   onMount(() => window.scrollTo(0, 0))
@@ -60,7 +60,7 @@
   />
 
   <label for="periodType">Period type*</label>
-  <select id="periodType" value="{periodType}" on:change={handleInput}>
+  <select id="periodType" value="{$dataStore.periodType}" on:change={handleInput}>
     {#each validPeriodTypes as periodType}
     <option value="{periodType}">
       {periodType}

@@ -1,5 +1,5 @@
 <script>
-  import { send, receive } from '../functions/crossfade';
+  import { receive } from '../functions/crossfade';
 
   export let onSubmit;
   export let key;

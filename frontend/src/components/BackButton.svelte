@@ -16,5 +16,6 @@
     font-size: 1.2em;
     color: #fff;
     opacity: 0.5;
+    cursor: pointer;
   }
 </style>

@@ -21,7 +21,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
   }
 
   div > :global(svg) {
@@ -32,10 +31,12 @@
   span {
     display: inline-block;
     font-size: 1.1em;
+    font-weight: 400;
   }
 
   p {
     text-align: center;
     font-weight: 300;
+    word-break: break-word;
   }
 </style>

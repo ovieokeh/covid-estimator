@@ -29,8 +29,8 @@
     <button class={setActiveClass('worst')} on:click={changeScenario('worst')}>Worst case scenario</button>
   </section>
 
-  <p>Although there are currently {formatNumber(data.reportedCases)} offically confirmed cases, studies show that
-  there may be up to {formatNumber(results.currentlyInfected)} unconfirmed cases.</p>
+  <p>Although there are currently {formatNumber(data.reportedCases)} offically confirmed cases in {data.region.name},
+  studies show that there may actually be up to {formatNumber(results.currentlyInfected)} unconfirmed cases.</p>
 
   <h2>In {data.timeToElapse} {data.periodType}, there will be:</h2>
 

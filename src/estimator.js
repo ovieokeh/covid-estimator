@@ -1,11 +1,15 @@
+/* eslint-disable operator-linebreak */
 import {
   getNormalisedDays,
   getCurrentlyInfected,
-  getInfectionsByDay
+  getInfectionsByDay,
+  getPercentOf,
+  getAvailableHospitalBeds
 } from './utilities';
 
 const covid19ImpactEstimator = (data) => {
-  const { periodType, timeToElapse, reportedCases } = data;
+  // eslint-disable-next-line object-curly-newline
+  const { periodType, timeToElapse, reportedCases, totalHospitalBeds } = data;
 
   const days = getNormalisedDays(periodType, timeToElapse);
 
@@ -14,10 +18,20 @@ const covid19ImpactEstimator = (data) => {
 
   const calculateRemainingData = (infected, period) => {
     const infectionsByRequestedTime = getInfectionsByDay(infected, period);
+    const severeCasesByRequestedTime = getPercentOf(
+      infectionsByRequestedTime,
+      15
+    );
+    const hospitalBedsByRequestedTime = Math.trunc(
+      getAvailableHospitalBeds(totalHospitalBeds, 35) -
+        severeCasesByRequestedTime
+    );
 
     return {
       currentlyInfected: infected,
-      infectionsByRequestedTime
+      infectionsByRequestedTime,
+      severeCasesByRequestedTime,
+      hospitalBedsByRequestedTime
     };
   };
 

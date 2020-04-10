@@ -1,3 +1,6 @@
+/* eslint-disable max-len */
+/* eslint-disable implicit-arrow-linebreak */
+
 export const getNormalisedDays = (periodType, days) => {
   switch (periodType) {
     case 'weeks':
@@ -20,3 +23,8 @@ export const getInfectionsByDay = (currentlyInfected, days) => {
 
   return Math.trunc(currentlyInfected * factor);
 };
+
+export const getPercentOf = (num, percent) => Math.trunc((num * percent) / 100);
+
+export const getAvailableHospitalBeds = (totalBeds, availability) =>
+  getPercentOf(totalBeds, availability);

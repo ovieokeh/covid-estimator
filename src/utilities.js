@@ -15,25 +15,23 @@ export const getNormalisedDays = (periodType, days) => {
 
 export const getCurrentlyInfected = (reportedCases, isSevere = false) => {
   const estimatedFactor = isSevere ? 50 : 10;
-  return Math.trunc(reportedCases * estimatedFactor);
+  return reportedCases * estimatedFactor;
 };
 
 export const getInfectionsByDay = (currentlyInfected, days) => {
   let factor = Math.trunc(days / 3);
   factor = 2 ** factor;
 
-  return Math.trunc(currentlyInfected * factor);
+  return currentlyInfected * factor;
 };
 
-export const getPercentOf = (num, percent) => Math.trunc((num * percent) / 100);
+export const getPercentOf = (num, percent) => (num * percent) / 100;
 
 export const getAvailableHospitalBeds = (totalBeds, availability) =>
   getPercentOf(totalBeds, availability);
 
 export const getDollarsInFlight = (infectionsByRequestedTime, days, region) =>
-  Math.trunc(
-    (infectionsByRequestedTime *
-      region.avgDailyIncomePopulation *
-      region.avgDailyIncomeInUSD) /
-      days
-  );
+  (infectionsByRequestedTime *
+    region.avgDailyIncomePopulation *
+    region.avgDailyIncomeInUSD) /
+  days;

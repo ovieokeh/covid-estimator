@@ -20,14 +20,17 @@ const covid19ImpactEstimator = (data) => {
 
   const days = getNormalisedDays(periodType, timeToElapse);
 
-  const currentlyInfected = getCurrentlyInfected(reportedCases);
-  const severeCurrentlyInfected = getCurrentlyInfected(reportedCases, true);
+  const currentlyInfected = Math.trunc(getCurrentlyInfected(reportedCases));
+  const severeCurrentlyInfected = Math.trunc(
+    getCurrentlyInfected(reportedCases, true)
+  );
 
   const calculateRemainingData = (infected, period) => {
-    const infectionsByRequestedTime = getInfectionsByDay(infected, period);
-    const severeCasesByRequestedTime = getPercentOf(
-      infectionsByRequestedTime,
-      15
+    const infectionsByRequestedTime = Math.trunc(
+      getInfectionsByDay(infected, period)
+    );
+    const severeCasesByRequestedTime = Math.trunc(
+      getPercentOf(infectionsByRequestedTime, 15)
     );
     const hospitalBedsByRequestedTime = Math.trunc(
       getAvailableHospitalBeds(totalHospitalBeds, 35) -

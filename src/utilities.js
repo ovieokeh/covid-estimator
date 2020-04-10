@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable max-len */
 /* eslint-disable implicit-arrow-linebreak */
 
@@ -28,3 +29,11 @@ export const getPercentOf = (num, percent) => Math.trunc((num * percent) / 100);
 
 export const getAvailableHospitalBeds = (totalBeds, availability) =>
   getPercentOf(totalBeds, availability);
+
+export const getDollarsInFlight = (infectionsByRequestedTime, days, region) =>
+  Math.trunc(
+    (infectionsByRequestedTime *
+      region.avgDailyIncomePopulation *
+      region.avgDailyIncomeInUSD) /
+      days
+  );

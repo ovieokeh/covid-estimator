@@ -1,25 +1,20 @@
 <script>
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route } from 'svelte-routing';
 
+  import Home from './routes/Home.svelte';
   import Results from './routes/Results.svelte';
-  import RegionForm from './routes/RegionForm.svelte';
-  import DataForm from './routes/DataForm.svelte';
 </script>
 
 <Router>
-  <div>
+  <div id="container">
     <h2>2020 Novel COVID-19 Estimator</h2>
 
     <Route path="/results">
       <Results />
     </Route>
 
-    <Route path="/step-2">
-      <DataForm />
-    </Route>
-
     <Route path="/">
-      <RegionForm />
+      <Home />
     </Route>
   </div>
 </Router>

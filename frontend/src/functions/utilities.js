@@ -34,7 +34,7 @@ export const formatPeriodType = (periodType, period) => {
 export const formatNumber = (number) => new Intl.NumberFormat().format(number);
 
 export const formatData = (impact) => ({
-  currentlyInfected: formatNumber(impact.currentlyInfected),
+  currentlyInfected: impact.currentlyInfected,
   infectionsByRequestedTime: formatNumber(impact.infectionsByRequestedTime),
   hospitalBedsByRequestedTime: formatNumber(impact.hospitalBedsByRequestedTime),
   severeCasesByRequestedTime: formatNumber(impact.severeCasesByRequestedTime),

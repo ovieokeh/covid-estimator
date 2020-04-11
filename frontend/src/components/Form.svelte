@@ -1,11 +1,10 @@
 <script>
-  import { receive } from '../functions/crossfade';
-
   export let onSubmit;
-  export let key;
+
+  import { fade } from 'svelte/transition';
 </script>
 
-<form on:submit|preventDefault={onSubmit} in:receive={{ key }}>
+<form on:submit|preventDefault={onSubmit} in:fade="{{ duration: 300 }}">
   <slot></slot>
 </form>
 
@@ -17,7 +16,7 @@
 
   form > :global(label) {
     display: block;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
     font-size: 1.1em;
   }
 
@@ -27,6 +26,7 @@
     color: #fff;
     background-color: transparent;
     margin-bottom: 20px;
+    padding: 10px;
   }
 
   form > :global(select > option) {
@@ -42,6 +42,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
+    margin-top: 30px;
     padding: 15px 30px;
     color: #fff;
     background-color: #200122;

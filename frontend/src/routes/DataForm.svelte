@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { navigate } from 'svelte-routing';
+  import FaRegCheckCircle from 'svelte-icons/fa/FaRegCheckCircle.svelte'
 
   import dataStore from '../stores/dataStore';
   import Form from '../components/Form.svelte';
@@ -68,5 +69,5 @@
     {/each}
   </select>
 
-  <button type="submit" data-go-estimate>Submit</button>
+  <button type="submit" data-go-estimate>Submit <FaRegCheckCircle /></button>
 </Form>

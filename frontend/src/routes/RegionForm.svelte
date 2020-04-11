@@ -1,6 +1,7 @@
 <script>
   import { onMount } from 'svelte';
   import { navigate } from 'svelte-routing';
+  import FaCaretRight from 'svelte-icons/fa/FaCaretRight.svelte'
 
   import regionStore from '../stores/regionStore';
   import Form from '../components/Form.svelte';
@@ -54,5 +55,5 @@
     required
   />
 
-  <button type="submit">{"Next >"}</button>
+  <button type="submit">Next <FaCaretRight /></button>
 </Form>

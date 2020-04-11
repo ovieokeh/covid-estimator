@@ -31,7 +31,7 @@
     align-items: center;
     width: 100%;
     min-height: 100vh;
-    padding: 20px 0;
+    padding: 10px 0;
     color: #fff;
     background: linear-gradient(320deg, #6f0000, #200122);
     background-size: 400% 400%;

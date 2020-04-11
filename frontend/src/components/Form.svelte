@@ -38,15 +38,24 @@
   }
 
   form > :global(button[type='submit']) {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     padding: 15px 30px;
     color: #fff;
     background-color: #200122;
     border-color: #fff;
+    border-radius: 5px;
     font-size: 1.1em;
     text-transform: uppercase;
     background: linear-gradient(to left, #6f0000, #200122);
     cursor: pointer;
+  }
+
+  form > :global(button > svg) {
+    width: 25px;
+    height: 25px;
+    margin-left: 10px;
   }
 </style>

@@ -1,25 +1,20 @@
 <script>
-  import { Router, Route } from "svelte-routing";
+  import { Router, Route } from 'svelte-routing';
 
+  import Home from './routes/Home.svelte';
   import Results from './routes/Results.svelte';
-  import RegionForm from './routes/RegionForm.svelte';
-  import DataForm from './routes/DataForm.svelte';
 </script>
 
 <Router>
-  <div>
+  <div id="container">
     <h2>2020 Novel COVID-19 Estimator</h2>
 
     <Route path="/results">
       <Results />
     </Route>
 
-    <Route path="/step-2">
-      <DataForm />
-    </Route>
-
     <Route path="/">
-      <RegionForm />
+      <Home />
     </Route>
   </div>
 </Router>
@@ -31,7 +26,7 @@
     align-items: center;
     width: 100%;
     min-height: 100vh;
-    padding: 20px 0;
+    padding: 10px 0;
     color: #fff;
     background: linear-gradient(320deg, #6f0000, #200122);
     background-size: 400% 400%;

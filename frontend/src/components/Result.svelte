@@ -1,12 +1,10 @@
 <script>
-  export let impact;
+  export let results;
+
+  import { fade } from 'svelte/transition';
 
   import StatBox from './StatBox.svelte'
-  import { fade, fly } from 'svelte/transition';
   import { formatData, iconMapping } from '../functions/utilities';
-
-  $: formattedData = formatData(impact);
-  $: results = Object.entries(formattedData).filter(a => a[0] !== 'currentlyInfected');
 </script>
 
 <div in:fade="{{ duration: 600 }}">

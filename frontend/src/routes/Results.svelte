@@ -4,13 +4,17 @@
 
   import Result from '../components/Result.svelte';
   import resultsStore from '../stores/resultsStore';
-  import { formatNumber } from '../functions/utilities';
+  import { formatData, formatNumber } from '../functions/utilities';
+
+  onMount(() => window.scrollTo(0, 0));
 
   let scenario = 'best';
 
   $: results = scenario === 'best'
-    ? $resultsStore.impact
-    : $resultsStore.severeImpact;
+    ? formatData($resultsStore.impact)
+    : formatData($resultsStore.severeImpact);
+
+  $: finalResults = Object.entries(results).filter(a => a[0] !== 'currentlyInfected');
 
   $: setActiveClass = id => (id === scenario) ? `${id} active` : id;
 
@@ -19,8 +23,6 @@
   const changeScenario = newScenario => () => { scenario = newScenario; };
 
   const runNew = () => navigate('/');
-
-  onMount(() => window.scrollTo(0, 0));
 </script>
 
 <div>
@@ -34,7 +36,7 @@
 
   <h2>In {data.timeToElapse} {data.periodType}, there will be:</h2>
 
-  <Result impact={results} />
+  <Result results={finalResults} />
 
   <button class="alt" on:click={runNew}>Run another estimate</button>
 </div>
@@ -52,7 +54,6 @@
   }
 
   button {
-    display: block;
     width: 100%;
     padding: 10px;
     color: #fff;
@@ -60,7 +61,6 @@
     border-color: transparent;
     border-radius: 3px;
     font-size: 1em;
-    cursor: pointer;
     transition: background-color ease-out 200ms;
   }
 
